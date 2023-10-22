@@ -24,17 +24,7 @@ steps:
     - |
       gcloud auth print-access-token > /tmp/token
 
-      ls -l
-
-      cd demo_files
-      
-      ls -l 
-      
-      cd integrations
-
-      ls -l
-      
-      cd airport-cicd
+      cd demo_files/integrations/airport-cicid
 
       #setup preferences
       /tmp/integrationcli prefs set integrationcli prefs set --nocheck=true --reg=$LOCATION --proj=$PROJECT_ID
