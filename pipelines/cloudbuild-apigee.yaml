@@ -40,11 +40,47 @@ steps:
         echo " --g=true" >> /tmp/cmd
       fi
 
-    tmp/integrationcli integrations list | grep -q "airports-integration-cicd"
+      /tmp/integrationcli integrations list | grep -q "airports-integration-cicd"
 
-    if [ $? -eq 0 ] ; then echo "Integration Found" ; else exit 1   ; fi
+      if [ $? -eq 0 ] ; then 
+        echo "Integration Found" | tee /workspace/integration_file
+      else 
+        echo "Integration Not Found" | tee /workspace/integration_file
+      fi
 
-#the name of the service account  to use when setting up the connector
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Set Variables'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        export build_token=\"$(gcloud auth application-default \
+          print-access-token)\"
+
+        # write all "build_" variables to the persistent volume "/workspace"
+        env | grep "^build_" > /workspace/build_vars
+  - name: 'gcr.io/cloud-builders/mvn'
+    id: "Package bundle"
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        mvn -f pom.xml -ntp process-resources apigee-enterprise:configure \
+          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev
+  - name: 'gcr.io/cloud-builders/mvn'
+    id: "Deploy bundle"
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+          if [ $(cat /workspace/integration_file) -eq "Integration Found" ] ; then 
+                  source /workspace/build_vars &&
+                  mvn -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
+                  -Denv=default-dev -Dbearer=${build_token}
+          else 
+              echo "Integration Not Found" 
+          fi
+
 substitutions:
   _GRANT_PERMISSIONS: "true"
   _CREATE_SECRET: "false"
