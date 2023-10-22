@@ -40,12 +40,12 @@ steps:
         echo " --g=true" >> /tmp/cmd
       fi
 
-      tmp/integrationcli integrations list | grep -q "airports-integration-cicd"
+      /tmp/integrationcli integrations list | grep -q "airports-integration-cicd"
 
       if [ $? -eq 0 ] ; then 
-        echo "Integration Found" 
+        echo "Integration Found" > /workspace/integration_file
       else 
-        exit 1 
+        echo "Integration Not Found" > /workspace/integration_file
       fi
 
 #the name of the service account  to use when setting up the connector
