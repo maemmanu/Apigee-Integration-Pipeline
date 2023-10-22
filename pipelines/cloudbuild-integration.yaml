@@ -24,11 +24,7 @@ steps:
     - |
       gcloud auth print-access-token > /tmp/token
 
-      echo "switched `pwd`"
-      
-      ls -l
-
-      cd ../integrations/airport-cicd
+      cd integrations/airport-cicd
 
       #setup preferences
       /tmp/integrationcli prefs set integrationcli prefs set --nocheck=true --reg=$LOCATION --proj=$PROJECT_ID
