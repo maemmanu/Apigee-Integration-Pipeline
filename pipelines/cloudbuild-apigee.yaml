@@ -40,9 +40,13 @@ steps:
         echo " --g=true" >> /tmp/cmd
       fi
 
-    tmp/integrationcli integrations list | grep -q "airports-integration-cicd"
+      tmp/integrationcli integrations list | grep -q "airports-integration-cicd"
 
-    if [ $? -eq 0 ] ; then echo "Integration Found" ; else exit 1   ; fi
+      if [ $? -eq 0 ] ; then 
+        echo "Integration Found" 
+      else 
+        exit 1 
+      fi
 
 #the name of the service account  to use when setting up the connector
 substitutions:
