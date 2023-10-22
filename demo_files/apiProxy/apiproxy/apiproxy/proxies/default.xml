@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+  <PreFlow name="PreFlow">
+    <Response/>
+    <Request>
+    </Request>
+  </PreFlow>
+  <Flows>
+    <Flow name="/airports">
+      <Description>List all Airports</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/airports") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="/airports/id">
+      <Description>List an Airport</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/airports/*") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="unknown-path-suffix">
+      <Request>
+        <Step>
+          <Name>RF-raiseFault404</Name>
+        </Step>
+      </Request>
+    </Flow>
+  </Flows>
+  <PostFlow name="PostFlow">
+    <Request/>
+    <Response/>
+  </PostFlow>
+  <HTTPProxyConnection>
+    <BasePath>/airports-app-integration-cicd-v1</BasePath>
+  </HTTPProxyConnection>
+  <RouteRule name="default">
+    <Condition>(request.verb != "OPTIONS")</Condition>
+    <TargetEndpoint>default</TargetEndpoint>
+  </RouteRule>
+  <RouteRule name="noroute"/>
+</ProxyEndpoint>

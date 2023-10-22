@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-setIntegrationVariables">
+  <DisplayName>AM-setIntegrationVariables</DisplayName>
+  <Properties/>
+  <AssignVariable>
+    <Name>target.copy.pathsuffix</Name>
+    <Value>false</Value>
+  </AssignVariable>
+  <AssignVariable>
+    <Name>ProjectId</Name>
+    <Value>bap-emea-apigee-5</Value>
+  </AssignVariable>
+  <AssignVariable>
+    <Name>IntegrationName</Name>
+    <Value>airports-integration-cicd</Value>
+  </AssignVariable>
+  <AssignVariable>
+    <Name>ApiTrigger</Name>
+    <Value>api_trigger/airport_cicd_API_1</Value>
+  </AssignVariable>
+  <AssignVariable>
+    <Name>Region</Name>
+    <Value>europe-west1</Value>
+  </AssignVariable>
+  <Set>
+    <Headers>
+      <Header>
+        <Name>Content-Type</Name>
+        <Value>application/json</Value>
+      </Header>
+    </Headers>
+    <Verb>POST</Verb>
+    <Path/>
+    <Payload>{integration.flow.variable.content}</Payload>
+  </Set>
+  <AssignVariable>
+    <Name>target.url</Name>
+    <Template>https://{Region}-integrations.googleapis.com/v1/projects/{ProjectId}/locations/{Region}/products/apigee/integrations/{IntegrationName}:execute</Template>
+  </AssignVariable>
+</AssignMessage>

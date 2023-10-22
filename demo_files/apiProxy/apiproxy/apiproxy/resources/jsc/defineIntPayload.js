@@ -1,24 +1,26 @@
-const requesttype = context.getVariable("proxy.pathsuffix");
-//const code = context.getVariable("request_airport_id")
+var jsonMessage = {};
+var query_variable = "";
 
-const operation_variable = "LIST";
+const requesttype = context.getVariable("proxy.pathsuffix");
+
+var operation_variable = "LIST";
 
 const airportsallpattern = /\/airports$/;
 const airportsidpattern = /\/airports\/[a-z]+/;
 
 if (airportsallpattern.test(requesttype)) {
-  //context.setVariable("query_variable", "code=''");
    query_variable = "code=''";
 } else if (airportsidpattern.test(requesttype)) {
   const code = context.getVariable("proxy.pathsuffix").split("/")[2].toUpperCase();
-  //context.setVariable("query_variable", "code='"+ code +"'");
-   query_variable = "code='"+ code +"'";
+  query_variable = "code='"+ code +"'";
 } else {
   setNotFoundError();
 }
 
-const integration_input = '{"operation":"'+ operation_variable + '","filterQuery":"' + query_variable + '" }';
-context.setVariable("json_input", integration_input);
+jsonMessage.operation = operation_variable;
+jsonMessage.filterQuery = query_variable;    
+
+context.setVariable('json_input', JSON.stringify(jsonMessage));
 
 function setNotFoundError() {
   const errorStatus = 404;
@@ -40,3 +42,4 @@ function setNotFoundError() {
   context.setVariable("response.header.Content-Type", "application/json");
   context.setVariable("response.content", JSON.stringify(errrorContent));
 }
+

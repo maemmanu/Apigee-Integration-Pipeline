@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="5" name="airports-app-integration-cicd-v1">
+  <DisplayName/>
+  <Description/>
+  <CreatedAt>1698002236817</CreatedAt>
+  <LastModifiedAt>1698002236817</LastModifiedAt>
+  <BasePaths>/airports-app-integration-cicd-v1</BasePaths>
+  <Policies>
+    <Policy>SIR-setIntRequest</Policy>
+    <Policy>RF-raiseFault404</Policy>
+    <Policy>AM-setListPayload</Policy>
+    <Policy>JS-defineIntPayload</Policy>
+    <Policy>AM-setIntegrationVariables</Policy>
+    <Policy>VAK-verifyAppID</Policy>
+  </Policies>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+  <Resources>
+    <Resource>jsc://defineIntPayload.js</Resource>
+  </Resources>
+  <TargetEndpoints>
+    <TargetEndpoint>default</TargetEndpoint>
+  </TargetEndpoints>
+</APIProxy>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SetIntegrationRequest continueOnError="false" enabled="true" name="SIR-setIntRequest">
+  <DisplayName>SIR-setIntRequest</DisplayName>
+  <ProjectId>bap-emea-apigee-5</ProjectId>
+  <IntegrationName>airports-integration-cicd</IntegrationName>
+  <IntegrationRegion>europe-west1</IntegrationRegion>
+  <ApiTrigger>api_trigger/airport_cicd_API_1</ApiTrigger>
+  <Parameters>
+    <Parameter name="InputJson" type="json" ref="json_input"/>
+  </Parameters>
+  <Request>integration.flow.variable</Request>
+</SetIntegrationRequest>
