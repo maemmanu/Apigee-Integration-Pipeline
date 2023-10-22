@@ -25,6 +25,8 @@ steps:
       gcloud auth print-access-token > /tmp/token
 
       echo "switched `pwd`"
+      
+      ls -l
 
       cd ../integrations/airport-cicd
 
