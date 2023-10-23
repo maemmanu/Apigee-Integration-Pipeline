@@ -47,7 +47,7 @@ steps:
       else 
         echo "Integration Not Found" | tee /workspace/integration_file
       fi
-<<<<<<< HEAD
+
 
   - name: 'gcr.io/cloud-builders/gcloud'
     id: 'Set Variables'
@@ -66,6 +66,7 @@ steps:
     args:
       - -c
       - |
+        cd demo_files/apiProxy/apiproxy
         mvn -f pom.xml -ntp process-resources apigee-enterprise:configure \
           -Pdev -Dorg=$PROJECT_ID -Denv=default-dev
   - name: 'gcr.io/cloud-builders/mvn'
@@ -74,6 +75,7 @@ steps:
     args:
       - -c
       - |
+          cd demo_files/apiProxy/apiproxy
           if [ $(cat /workspace/integration_file) -eq "Integration Found" ] ; then 
                   source /workspace/build_vars &&
                   mvn -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
@@ -81,8 +83,7 @@ steps:
           else 
               echo "Integration Not Found" 
           fi
-=======
->>>>>>> c60b62e7e08acd30a50d4c103a3b10f964e8c398
+
 
 substitutions:
   _GRANT_PERMISSIONS: "true"
