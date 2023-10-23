@@ -71,7 +71,6 @@ steps:
           grep -q "Integration Found" /workspace/integration_file
           
           if [ $? -eq 0 ] ; then 
-                  source /workspace/build_vars &&
                   mvn -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
                   -Denv=default-dev -Dbearer=${build_token}
           else 
