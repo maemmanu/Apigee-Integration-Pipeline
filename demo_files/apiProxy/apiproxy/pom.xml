@@ -18,7 +18,7 @@
     <groupId>apigee</groupId>
     <artifactId>airports-app-integration-cicd</artifactId>
     <version>v1</version>
-    <name>airports-cicd${deployment.suffix}</name>
+    <name>airports-app-integration-cicd-v3</name>
     <packaging>pom</packaging>
     <pluginRepositories>
         <pluginRepository>
