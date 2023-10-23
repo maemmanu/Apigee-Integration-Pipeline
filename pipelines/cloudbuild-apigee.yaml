@@ -81,6 +81,8 @@ steps:
           cat /workspace/integration_file
           
           grep -q "Integration Found" /workspace/integration_file
+
+          cat /workspace/build_vars
           
           if [ $? -eq 0 ] ; then 
                   source /workspace/build_vars &&
