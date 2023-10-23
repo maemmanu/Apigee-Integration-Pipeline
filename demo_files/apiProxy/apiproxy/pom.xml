@@ -55,6 +55,7 @@
                 <apigee.org>${org}</apigee.org>
                 <apigee.options>override</apigee.options> 
                 <apigee.bearer>${bearer}</apigee.bearer>
+                <apigee.googletoken.email>${googleTokenEmail}</apigee.googletoken.email>
             </properties>
         </profile>
     </profiles>
