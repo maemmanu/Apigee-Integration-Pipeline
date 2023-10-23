@@ -47,7 +47,18 @@ steps:
       else 
         echo "Integration Not Found" | tee /workspace/integration_file
       fi
+      
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'Set Variables'
+  entrypoint: 'bash'
+  args:
+      - -c
+      - |
+        export build_token=\"$(gcloud auth application-default \
+          print-access-token)\"
 
+        # write all "build_" variables to the persistent volume "/workspace"
+        env | grep "^build_" > /workspace/build_vars
 
 - name: 'gcr.io/cloud-builders/mvn'
   id: "Package bundle"
@@ -58,6 +69,7 @@ steps:
         cd demo_files/apiProxy/apiproxy
         mvn -f pom.xml -ntp process-resources apigee-enterprise:configure \
           -Pdev -Dorg=$PROJECT_ID -Denv=default-dev
+          
 - name: 'gcr.io/cloud-builders/mvn'
   id: "Deploy bundle"
   entrypoint: 'bash'
@@ -71,12 +83,12 @@ steps:
           grep -q "Integration Found" /workspace/integration_file
           
           if [ $? -eq 0 ] ; then 
+                  source /workspace/build_vars &&
                   mvn -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
                   -Denv=default-dev -Dbearer=${build_token}
           else 
               echo "Integration Not Found" 
           fi
-
 
 substitutions:
   _GRANT_PERMISSIONS: "true"
