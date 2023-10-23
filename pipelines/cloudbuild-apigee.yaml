@@ -68,7 +68,7 @@ steps:
       - |
         cd demo_files/apiProxy/apiproxy
         mvn -f pom.xml -ntp process-resources apigee-enterprise:configure \
-          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev
+          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev -DgoogleTokenEmail=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
           
 - name: 'gcr.io/cloud-builders/mvn'
   id: "Deploy bundle"
