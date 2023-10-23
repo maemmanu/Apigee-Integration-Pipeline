@@ -54,11 +54,13 @@ steps:
   args:
       - -c
       - |
+        export build_email=\"$(gcloud auth list --filter=status:ACTIVE --format=\"value(account)\")\"
+
         export build_token=\"$(gcloud auth application-default \
           print-access-token)\"
 
         # write all "build_" variables to the persistent volume "/workspace"
-        env | grep "^build_" | tee /workspace/build_vars
+        env | grep "^build_" >  tee /workspace/build_vars
 
 - name: 'gcr.io/cloud-builders/mvn'
   id: "Package bundle"
@@ -67,8 +69,8 @@ steps:
       - -c
       - |
         cd demo_files/apiProxy/apiproxy
-        mvn -X -f pom.xml -ntp process-resources apigee-enterprise:configure \
-          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev -DgoogleTokenEmail=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
+        mvn -f pom.xml -ntp process-resources apigee-enterprise:configure \
+          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev 
           
 - name: 'gcr.io/cloud-builders/mvn'
   id: "Deploy bundle"
@@ -86,8 +88,8 @@ steps:
           
           if [ $? -eq 0 ] ; then 
                   source /workspace/build_vars &&
-                  mvn -X -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
-                  -Denv=default-dev -Dbearer=${build_token} -DgoogleTokenEmail=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
+                  mvn -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
+                  -Denv=default-dev -Dbearer=${build_token} -DgoogleTokenEmail=${build_email}
           else 
               echo "Integration Not Found" 
           fi
