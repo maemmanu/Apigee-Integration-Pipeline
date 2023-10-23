@@ -31,7 +31,7 @@
     <Response/>
   </PostFlow>
   <HTTPProxyConnection>
-    <BasePath>/airports-app-integration-cicd-v1</BasePath>
+    <BasePath>/airports-app-integration-cicd-v3</BasePath>
   </HTTPProxyConnection>
   <RouteRule name="default">
     <Condition>(request.verb != "OPTIONS")</Condition>
