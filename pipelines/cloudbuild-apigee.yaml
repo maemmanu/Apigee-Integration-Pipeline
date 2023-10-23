@@ -69,8 +69,9 @@ steps:
       - -c
       - |
         cd demo_files/apiProxy/apiproxy
+        source /workspace/build_vars &&
         mvn -f pom.xml -ntp process-resources apigee-enterprise:configure \
-          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev 
+          -Pdev -Dorg=$PROJECT_ID -Denv=default-dev -DgoogleTokenEmail=${build_email}
           
 - name: 'gcr.io/cloud-builders/mvn'
   id: "Deploy bundle"
@@ -88,7 +89,7 @@ steps:
           
           if [ $? -eq 0 ] ; then 
                   source /workspace/build_vars &&
-                  mvn -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
+                  mvn -X -f pom.xml -ntp apigee-enterprise:deploy -Pdev -Dorg=$PROJECT_ID \
                   -Denv=default-dev -Dbearer=${build_token} -DgoogleTokenEmail=${build_email}
           else 
               echo "Integration Not Found" 
