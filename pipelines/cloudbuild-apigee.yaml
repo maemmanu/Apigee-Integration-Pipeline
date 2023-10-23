@@ -54,7 +54,7 @@ steps:
   args:
       - -c
       - |
-        export build_email=\"$(gcloud auth list --filter=status:ACTIVE --format=\"value(account)\")\"
+        export build_email=\"$(gcloud auth list --filter=status:ACTIVE --format="value(account)")\"
 
         export build_token=\"$(gcloud auth application-default \
           print-access-token)\"
