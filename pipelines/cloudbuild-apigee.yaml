@@ -47,6 +47,7 @@ steps:
       else 
         echo "Integration Not Found" | tee /workspace/integration_file
       fi
+<<<<<<< HEAD
 
   - name: 'gcr.io/cloud-builders/gcloud'
     id: 'Set Variables'
@@ -80,6 +81,8 @@ steps:
           else 
               echo "Integration Not Found" 
           fi
+=======
+>>>>>>> c60b62e7e08acd30a50d4c103a3b10f964e8c398
 
 substitutions:
   _GRANT_PERMISSIONS: "true"
