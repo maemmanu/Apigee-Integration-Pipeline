@@ -77,7 +77,7 @@ steps:
       - |
           cd demo_files/apiProxy/apiproxy
           
-          grep -q "Integration Found" /workspace/integration_file
+          grep "Integration Found" /workspace/integration_file
           
           if [ $? -eq 0 ] ; then 
                   source /workspace/build_vars &&
