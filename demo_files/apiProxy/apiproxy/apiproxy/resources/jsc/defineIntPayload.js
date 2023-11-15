@@ -6,7 +6,7 @@ const requesttype = context.getVariable("proxy.pathsuffix");
 var operation_variable = "LIST";
 
 const airportsallpattern = /\/airports$/;
-const airportsidpattern = /\/airports\/[a-z]+/;
+const airportsidpattern = /\/airports\/[A-Z]+/;
 
 if (airportsallpattern.test(requesttype)) {
    query_variable = "code=''";
