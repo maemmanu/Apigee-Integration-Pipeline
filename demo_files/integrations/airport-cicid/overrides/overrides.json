@@ -40,7 +40,7 @@
 		{
 			"key": "_environment",
 			"defaultValue": {
-				"stringValue": "dev"
+				"stringValue": "dev-share-and-learn"
 			}
 		},
 		{
