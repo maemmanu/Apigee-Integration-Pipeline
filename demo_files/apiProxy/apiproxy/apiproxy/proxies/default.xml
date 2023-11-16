@@ -7,7 +7,7 @@
   </PreFlow>
   <Flows>
     <Flow name="/airports">
-      <Description>List all Airports</Description>
+      <Description>List all the Airports</Description>
       <Request/>
       <Response/>
       <Condition>(proxy.pathsuffix MatchesPath "/airports") and (request.verb = "GET")</Condition>
