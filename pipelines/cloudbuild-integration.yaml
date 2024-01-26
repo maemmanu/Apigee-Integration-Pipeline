@@ -43,6 +43,8 @@ steps:
         echo " --g=true" >> /tmp/cmd
       fi
 
+      ls -l
+      
       integrationcli integrations apply -f . $(cat /tmp/cmd)
 
 #the name of the service account  to use when setting up the connector
