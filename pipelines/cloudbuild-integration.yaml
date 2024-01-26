@@ -17,7 +17,7 @@
 
 steps:
 - id: 'Apply Integration scaffolding configuration'
-  name: gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
+  name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args:
     - -c
