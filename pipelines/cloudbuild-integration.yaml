@@ -17,7 +17,7 @@
 
 steps:
 - id: 'Apply Integration scaffolding configuration'
-  name: gcr.io/cloud-builders/gcloud
+  name: gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
   entrypoint: 'bash'
   args:
     - -c
@@ -31,8 +31,6 @@ steps:
       integrationcli prefs set integrationcli prefs set --nocheck=true --reg=$LOCATION --proj=$PROJECT_ID
       integrationcli token cache --metadata-token
 
-      ls
-
       if [ ${_DEFAULT_SA} = "false" ]; then
         echo " --sa ${_SERVICE_ACCOUNT_NAME}" >> /tmp/cmd
       fi
@@ -45,7 +43,7 @@ steps:
         echo " --g=true" >> /tmp/cmd
       fi
       
-      integrationcli integrations apply -f . $(cat /tmp/cmd)
+      integrationcli integrations apply -f /workspace/demo_files/integrations/airport-cicid $(cat /tmp/cmd)
 
 #the name of the service account  to use when setting up the connector
 substitutions:
