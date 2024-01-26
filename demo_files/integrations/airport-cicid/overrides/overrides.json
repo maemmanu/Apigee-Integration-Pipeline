@@ -40,7 +40,7 @@
 		{
 			"key": "_environment",
 			"defaultValue": {
-				"stringValue": "dev"
+				"stringValue": "development"
 			}
 		},
 		{
