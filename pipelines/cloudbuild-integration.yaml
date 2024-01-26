@@ -43,7 +43,7 @@ steps:
         echo " --g=true" >> /tmp/cmd
       fi
       
-      integrationcli integrations apply -f /workspace/demo_files/integrations/airport-cicid $(cat /tmp/cmd)
+      integrationcli integrations apply -f /workspace/demo_files/integrations/airport-cicid --userlabel $COMMIT_SHA $(cat /tmp/cmd)
 
 #the name of the service account  to use when setting up the connector
 substitutions:
