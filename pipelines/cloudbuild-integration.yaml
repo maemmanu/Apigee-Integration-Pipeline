@@ -31,6 +31,8 @@ steps:
       integrationcli prefs set integrationcli prefs set --nocheck=true --reg=$LOCATION --proj=$PROJECT_ID
       integrationcli token cache --metadata-token
 
+      ls
+
       if [ ${_DEFAULT_SA} = "false" ]; then
         echo " --sa ${_SERVICE_ACCOUNT_NAME}" >> /tmp/cmd
       fi
@@ -42,8 +44,6 @@ steps:
       if [ ${_GRANT_PERMISSION} = "true" ]; then
         echo " --g=true" >> /tmp/cmd
       fi
-
-      ls -l
       
       integrationcli integrations apply -f . $(cat /tmp/cmd)
 
