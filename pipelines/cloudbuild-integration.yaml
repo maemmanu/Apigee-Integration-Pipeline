@@ -26,7 +26,7 @@ steps:
 
       curl -L https://raw.githubusercontent.com/GoogleCloudPlatform/application-integration-management-toolkit/main/downloadLatest.sh | sh -
       
-      export PATH=$PATH:$HOME/.integrationcli/bin
+      export PATH=/builder/home/.integrationcli/bin
 
       integrationcli prefs set integrationcli prefs set --nocheck=true --reg=$LOCATION --proj=$PROJECT_ID
       integrationcli token cache --metadata-token
