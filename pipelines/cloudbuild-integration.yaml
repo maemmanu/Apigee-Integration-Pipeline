@@ -17,7 +17,7 @@
 
 steps:
 - id: 'Apply Integration scaffolding configuration'
-  name: us-docker.pkg.dev/appintegration-toolkit/images/integrationcli:latest
+  name: us-docker.pkg.dev/appintegration-toolkit/images/integrationcli:v0.70
   entrypoint: 'bash'
   args:
     - -c
