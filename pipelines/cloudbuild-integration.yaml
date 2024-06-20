@@ -55,7 +55,7 @@ substitutions:
   _KMS_RING_NAME: "app-integration"
   _KMS_KEY_NAME: "integration"
   _WAIT: "false"
-
+serviceAccount: connectors@bap-emea-apigee-5.iam.gserviceaccount.com	
 options:
   logging: CLOUD_LOGGING_ONLY
   substitution_option: "ALLOW_LOOSE"
