@@ -30,10 +30,8 @@ steps:
 
       integrationcli prefs set integrationcli prefs set --nocheck=true --reg=$LOCATION --proj=$PROJECT_ID
       integrationcli token cache --metadata-token
-
-      if [ ${_DEFAULT_SA} = "false" ]; then
+      
         echo " --sa ${_SERVICE_ACCOUNT_NAME}" >> /tmp/cmd
-      fi
 
       if [ ${_ENCRYPTED} = "true" ]; then
         echo " -k locations/$LOCATION/keyRings/${_KMS_RING_NAME}/cryptoKeys/${_KMS_KEY_NAME}" >> /tmp/cmd
